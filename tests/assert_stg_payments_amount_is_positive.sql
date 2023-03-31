@@ -1,11 +1,13 @@
-WITH payments AS (
+with payments as (
 
-    SELECT * FROM {{ ref('stg_payments') }}
+    select * from {{ref('stg_payments')}}
 )
 
-SELECT 
+select
     order_id,
     sum(amount) as total_amount
-FROM payments
-GROUP BY order_id
+
+from payments
+
+group by 1
 having total_amount < 0
