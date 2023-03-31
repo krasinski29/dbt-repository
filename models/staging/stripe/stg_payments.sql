@@ -1,12 +1,22 @@
-WITH payments AS (
-SELECT 
-    id AS payment_id,
-    orderid AS order_id,
-    paymentmethod AS payment_method,
-    status AS payment_status,
-    amount/100 AS amount,
-    created AS created_date,
-    _batched_at
-FROM raw.stripe.payment
+with source as( 
+
+    select * from {{source( 'stripe', 'payment') }}
+),
+
+staged as (
+
+select
+    id as payment_id,
+    orderid as order_id,
+    paymentmethod as payment_method,
+    status,
+
+    -- amount is stored in cents, convert it to dollars
+    amount / 100 as amount,
+    created as created_at
+
+from source
+
 )
-SELECT * FROM payments
+
+select * from staged

@@ -2,30 +2,40 @@ version: 2
 
 models:
   - name: stg_customers
-    columns: 
-      - name: customer_id
+    description: one unique costumer per row 
+    columns:
+      - name: customer_id 
+        description: the primary key for stg_customers
         tests:
           - unique
           - not_null
 
   - name: stg_orders
+    description: one order per customer
     columns:
       - name: order_id
+        description: the primary key for stg_orders 
         tests:
           - unique
           - not_null
       - name: status
-        tests:
+        description: '{{ doc("order_status") }}' # This syntaxe is use to refer to the md file. Need to use the name on the top of the md file. 
+        tests: 
           - accepted_values:
               values:
-                - completed
                 - shipped
-                - returned
+                - completed
                 - return_pending
-                - placed  
-      - name: customer_id
+                - returned
+                - placed
+      - name: customer_id 
         tests:
           - relationships:
-              to: ref('stg_customers')
               field: customer_id
-     
+              to: ref('stg_customers')
+              
+        
+              
+          
+              
+              
