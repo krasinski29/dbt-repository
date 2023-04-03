@@ -9,6 +9,10 @@ models:
         tests:
           - unique
           - not_null
+      - name: first_name 
+        description: the customer first name 
+      - name: last_name 
+        description: initial letter of the customer last name 
 
   - name: stg_orders
     description: one order per customer
@@ -28,7 +32,7 @@ models:
                 - return_pending
                 - returned
                 - placed
-      - name: customer_id 
+      - name: customer_id
         tests:
           - relationships:
               field: customer_id
