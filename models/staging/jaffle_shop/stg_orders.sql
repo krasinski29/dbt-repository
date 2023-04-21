@@ -11,6 +11,8 @@ select
         status
 
     from source
+    {{ limit_data_in_dev('order_date') }}
+    
 )
 
-select * from staged
+select * from staged 
