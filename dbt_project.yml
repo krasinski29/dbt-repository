@@ -38,6 +38,12 @@ models:
     marts:
       core:
         +materialized: table 
+  # snowflake_spend:
+  #   +enabled: true
+  #   +schema: spend
+  #   xf: 
+  #     snowflake_warehouse_monitoring_xf:
+  #       +enabled: false
 
 
     
